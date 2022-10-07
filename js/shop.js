@@ -72,12 +72,16 @@ let total = 0;
 
 // Exercise 1
 function buy(id) {
-    // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cartList array
+	// 1. Loop for to the array products to get the item to add to cart
+	// 2. Add found product to the cartList array
 
-    cartList.push(products.find((product) => product.id === id));
-    document.getElementById("count_product").innerHTML = cartList.length;
+	products.forEach(function (product) {
+		if (product.id == id) {
+			cartList.push(product);
+		}
+	});
 
+	console.log(cartList);
 }
 
 // Exercise 2
@@ -86,8 +90,8 @@ function cleanCart() {
     
     cartList = [];
 
-    generateCart();
-    
+    console.log(cartList);
+
 }
 
 // Exercise 3
