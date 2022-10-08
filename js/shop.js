@@ -80,7 +80,7 @@ function buy(id) {
 			cartList.push(product);
 		}
 	})
-    
+
     document.getElementById('count_product').innerHTML = cartList.length;
     console.log(cartList);
     calculateTotal()
@@ -89,10 +89,13 @@ function buy(id) {
 // Exercise 2
 function cleanCart() {
     // Objetivo general: Vaciar carrito
-    
     cartList = [];
-
+    cart = [];
+    total = 0;
     console.log(cartList);
+    console.log("Total carrito: $" + total)
+    document.getElementById('count_product').innerHTML = 0;
+    printCart();
 
 }
 
@@ -129,14 +132,12 @@ function generateCart() {
         })
     })
 
-    console.log(cart);
+    applyPromotionsCart(cart);
 }
 
 // Exercise 5
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
-    function applyPromotionsCart(cart) {
-        // Apply promotions to each item in the array "cart"
    
        cart.forEach(function(product){
            if(product.offer && product.quantity >= product.offer.number){
