@@ -155,8 +155,8 @@ function applyPromotionsCart() {
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
     //generateCart();
-    var htmlCartList = cart.length == 0 ? "<tr><th scope='row'>Empty</th><td></td><td></td><td></td><td></td></tr>" : "";
-    var subtotal = 0;
+    let htmlCartList = cart.length == 0 ? "<tr><th scope='row'>Empty</th><td></td><td></td><td></td><td></td></tr>" : "";
+    let subtotal = 0;
     cart.forEach(function(product){
        htmlCartList += "<tr>"
        htmlCartList += "<th scope='row'>" + product.name + "</th><td>$" + product.price + "</td><td>" + product.quantity + "</td><td>";
@@ -174,7 +174,6 @@ function printCart() {
     document.getElementById('total_price').innerHTML = subtotal;
 }
 
-
 // ** Nivell II **
 
 // Exercise 7
@@ -182,6 +181,40 @@ function addToCart(id) {
     // Refactor previous code in order to simplify it 
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array or update its quantity in case it has been added previously.
+
+    let selectedProduct;
+    let productOnCart = false;
+    let totalQuantity = document.getElementById('count_product').innerHTML;
+    
+    
+    products.forEach(function(product){
+        if(product.id == id){
+            selectedProduct = product;
+        }
+    })
+    if(cart.length == 0){
+        cart.push(selectedProduct);
+        cart[0].quantity = 1
+        productOnCart = true;
+    }
+    else{
+        cart.forEach(function(product, index){
+            if(product.id == id){
+                cart[index].quantity++;
+                productOnCart = true;
+            }
+        }) 
+    }
+    if(!productOnCart){
+        cart.push(selectedProduct);
+        cart[cart.length - 1].quantity = 1;        
+    }
+
+    document.getElementById('count_product').innerHTML = parseInt(totalQuantity) + 1;
+    applyPromotionsCart(cart);
+    calculateTotal()
+    printCart()
+
 }
 
 // Exercise 8
