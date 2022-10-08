@@ -79,9 +79,11 @@ function buy(id) {
 		if (product.id == id) {
 			cartList.push(product);
 		}
-	});
-
-	console.log(cartList);
+	})
+    
+    document.getElementById('count_product').innerHTML = cartList.length;
+    console.log(cartList);
+    calculateTotal()
 }
 
 // Exercise 2
@@ -133,6 +135,19 @@ function generateCart() {
 // Exercise 5
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+    function applyPromotionsCart(cart) {
+        // Apply promotions to each item in the array "cart"
+   
+       cart.forEach(function(product){
+           if(product.offer && product.quantity >= product.offer.number){
+               var discount = product.price * (product.offer.percent / 100);
+               var discount = Number(discount.toFixed(2));
+               product.subtotalWithDiscount = ((product.price - discount) * product.quantity);
+           }
+       })
+   
+       console.log(cart)
+    }
 }
 
 // Exercise 6
