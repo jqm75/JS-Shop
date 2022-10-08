@@ -148,12 +148,30 @@ function applyPromotionsCart() {
        })
    
        console.log(cart)
-    }
 }
+
 
 // Exercise 6
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+    //generateCart();
+    var htmlCartList = cart.length == 0 ? "<tr><th scope='row'>Empty</th><td></td><td></td><td></td><td></td></tr>" : "";
+    var subtotal = 0;
+    cart.forEach(function(product){
+       htmlCartList += "<tr>"
+       htmlCartList += "<th scope='row'>" + product.name + "</th><td>$" + product.price + "</td><td>" + product.quantity + "</td><td>";
+       if(product.subtotalWithDiscount){
+           htmlCartList += "$"+ product.subtotalWithDiscount + " (-" + product.offer.percent+"%)</td>";
+           subtotal += product.subtotalWithDiscount;
+       }
+       else{
+           htmlCartList += "$" + product.quantity * product.price + "</td>";
+           subtotal += (product.quantity * product.price);
+       }
+       htmlCartList += "<td><i rel='" + product.id + "' class='fas fa-trash remove-product'></i></td></tr>";
+    })
+    document.getElementById('cart_list').innerHTML = htmlCartList;
+    document.getElementById('total_price').innerHTML = subtotal;
 }
 
 
