@@ -93,7 +93,7 @@ function cleanCart() {
     cart = [];
     total = 0;
     console.log(cartList);
-    console.log("Total carrito: $" + total)
+    console.log("Total cart: $" + total)
     document.getElementById('count_product').innerHTML = 0;
     printCart();
 
@@ -106,7 +106,7 @@ function calculateTotal() {
      cartList.forEach(function(product, index){
          total += product.price
      })
-     console.log("Total carrito: $" + total)
+     console.log("Total cart: $" + total)
 }
 
 // Exercise 4
