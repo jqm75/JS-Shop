@@ -1,6 +1,6 @@
 // Exercise 6
 function validate() {
-// Creamos reglas para validar
+// Creamos reglas para validar email
 	const validateEmail = (email) => {
 		return String(email)
 		  .toLowerCase()
@@ -20,19 +20,19 @@ function validate() {
 	}
 // Fin reglas
 
-	var error = 0;
+	let error = 0;
 	// Get the input fields
-	var fName = document.getElementById("fName");
-	var fEmail = document.getElementById("fEmail");
+	let fName = document.getElementById("fName");
+	let fEmail = document.getElementById("fEmail");
 
-	var fAddress = document.getElementById("fAddress");
-	var fLastN = document.getElementById("fLastN");
-	var fPassword = document.getElementById("fPassword");
-	var fPhone = document.getElementById("fPhone");
+	let fAddress = document.getElementById("fAddress");
+	let fLastN = document.getElementById("fLastN");
+	let fPassword = document.getElementById("fPassword");
+	let fPhone = document.getElementById("fPhone");
 
 	// Get the error elements
-/* 	var errorName = document.getElementById("errorName");
-	var errorEmail = document.getElementById("errorEmail");  */
+/* 	let errorName = document.getElementById("errorName");
+	let errorEmail = document.getElementById("errorEmail");  */
 	
 	// Validate fields entered by the user: name, phone, password, and email
 	if(fName.value == "" || !fName.value.match(/^[A-Za-z\s]*$/) || fName.value.length < 3){
@@ -94,7 +94,7 @@ function validate() {
 	var invalidFields = document.getElementsByClassName('is-invalid');
 	
 }
-checkoutForm.addEventListener('focus', e => {
+checkoutForm.addEventListener('focus', e => {   //REVISAR
 	if(e.target.classList.contains('is-invalid')){
 		e.target.classList.remove('is-invalid')
 	} 

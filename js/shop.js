@@ -81,7 +81,7 @@ function buy(id) {
 		}
 	})
 
-    document.getElementById('count_product').innerHTML = cartList.length;
+    document.getElementById('count_product').innerHTML = cartList.length; // count_product: Line 31 index.html
     console.log(cartList, "cartList");
     calculateTotal()
 }
@@ -186,7 +186,7 @@ function addToCart(id) {
 
 	let selectedProduct;
 	let productOnCart = false;
-	let totalQuantity = document.getElementById("count_product").innerHTML;
+	let totalQuantity = document.getElementById("count_product").innerHTML; 
 
 	products.forEach(function (product) {
 		if (product.id == id) {
@@ -242,7 +242,7 @@ function open_modal(){
  console.log("Open Modal");
  printCart();
 }
-document.getElementById('cart_list').addEventListener('click', e => {
+document.getElementById('cart_list').addEventListener('click', e => {  //REVISAR
 if(e.target.classList.contains('remove-product')){
     id = e.target.getAttribute('rel');
     removeFromCart(id);
