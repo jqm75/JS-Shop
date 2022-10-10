@@ -75,7 +75,7 @@ function buy(id) {
 	// 1. Loop for to the array products to get the item to add to cart
 	// 2. Add found product to the cartList array
     addToCart(id)
-	products.forEach(function (product, index) {
+	products.forEach(function (product) {
 		if (product.id == id) {
 			cartList.push(product);
 		}
@@ -103,7 +103,7 @@ function cleanCart() {
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
     total = 0;
-     cartList.forEach(function(product, index){
+     cartList.forEach(function(product){
          total += product.price
      })
      console.log("Total cart: $" + total)
