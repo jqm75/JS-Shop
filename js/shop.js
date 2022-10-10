@@ -137,17 +137,19 @@ function generateCart() {
 
 // Exercise 5
 function applyPromotionsCart(cart) {
-    // Apply promotions to each item in the array "cart"
-   
-       cart.forEach(function(product){
-           if(product.offer && product.quantity >= product.offer.number){
-               let discount = product.price * (product.offer.percent / 100);
-               let discount = Number(discount.toFixed(2));
-               product.subtotalWithDiscount = ((product.price - discount) * product.quantity);
-           }
-       })
-   
-       console.log(cart)
+	// Apply promotions to each item in the array "cart"
+
+	cart.forEach((element) => {
+		element.subtotalWithDiscount = element.subtotal;
+
+		if (element.offer && element.quantity >= element.offer.number) {
+			element.subtotalWithDiscount = parseFloat(
+				(element.quantity * element.offer.percent).toFixed(2)
+			);
+		}
+	});
+
+	console.log(cart);
 }
 
 // Exercise 6
