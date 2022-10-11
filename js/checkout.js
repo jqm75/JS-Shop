@@ -92,10 +92,8 @@ function validate() {
 		alert("OK");
 	}
 
-	/* let invalidFields = document.getElementsByClassName('is-invalid'); //REVISAR  */
-	
 }
-checkoutForm.addEventListener('focus', e => {   
+checkoutForm.addEventListener('click', e => {   //REVISAR
 	if(e.target.classList.contains('is-invalid')){
 		e.target.classList.remove('is-invalid')
 	} 
