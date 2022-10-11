@@ -114,7 +114,7 @@ function generateCart() {
 	// generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 	cart = [];
 
-	cartList.forEach(function (quantity, id) {
+	cartList.forEach(function (id) { //quantity
 		products.forEach(function (product) {
 			if (product.id === id) {
 				cart.push(product);
