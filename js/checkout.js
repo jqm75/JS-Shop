@@ -24,10 +24,20 @@ function validate() {
 	// Get the input fields
 	let fName = document.getElementById("fName");
 	let fEmail = document.getElementById("fEmail");
+
 	let fAddress = document.getElementById("fAddress");
 	let fLastN = document.getElementById("fLastN");
 	let fPassword = document.getElementById("fPassword");
 	let fPhone = document.getElementById("fPhone");
+
+	// Get the error elements
+/* 	 var errorName = document.getElementById("errorName");
+	var errorEmail = document.getElementById("errorEmail");
+
+	var errorAddress = document.getElementById("errorAddress");
+	var errorLastN = document.getElementById("errorLastN");
+	var errorPassword = document.getElementById("errorPassword");
+	var errorPhone = document.getElementById("errorPhone");  */
 	
 	// Validate fields entered by the user: name, phone, password, and email
 	if(fName.value == "" || !fName.value.match(/^[A-Za-z\s]*$/) || fName.value.length < 3){
@@ -78,7 +88,6 @@ function validate() {
 		addClassError(fPhone, false);
 	}
 
-
 	if(error>0){
 		checkoutForm.addEventListener('submit', e => {
 			e.preventDefault()
@@ -86,11 +95,12 @@ function validate() {
 	}else{
 		alert("OK");
 	}
-	let invalidFields = document.getElementsByClassName('is-invalid');
+	/* let invalidFields = document.getElementsByClassName('is-invalid'); */
 	
 }
+/* 
 checkoutForm.addEventListener('focus', e => {
 	if(e.target.classList.contains('is-invalid')){
 		e.target.classList.remove('is-invalid')
 	} 
-}, true)
+}, true) */

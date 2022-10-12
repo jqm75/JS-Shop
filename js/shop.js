@@ -140,20 +140,19 @@ function generateCart() {
 
 function applyPromotionsCart(cart) {
 	// Apply promotions to each item in the array "cart"
-	cart.forEach((element) => {
-		element.subtotalWithDiscount = element.subtotal;
-		const activateDiscount = element.quantity >= element.offer.number;
-		if (element.offer && activateDiscount) {
-			element.subtotalWithDiscount = parseFloat(
-				(element.quantity * element.offer.percent).toFixed(2)
-			);
-		} else if (element.offer && !activateDiscount) {
-			element.subtotalWithDiscount = "";
-		}
-	});
 
-	console.log(cart);
-}
+	cart.forEach((element) => {
+
+		element.subtotalWithDiscount = element.subtotal;
+	
+		if ( element.offer && element.quantity >= element.offer.number) {
+		  element.subtotalWithDiscount = parseFloat((element.quantity * element.offer.percent).toFixed(2));
+		} 
+	
+	  });
+	}
+
+
 
 // Exercise 6
 function printCart() {
