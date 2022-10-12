@@ -75,7 +75,7 @@ function buy(id) {
 	// 1. Loop for to the array products to get the item to add to cart
 	// 2. Add found product to the cartList array
 
-	products.forEach(function(product, index){
+	products.forEach(function(product){
 		if(product.id == id){
 		   cartList.push(product);
 		}
@@ -115,7 +115,7 @@ function generateCart() {
 	// generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 	cart = [];
     quantities = [];
-    cartList.forEach(function(product, index){
+    cartList.forEach(function(product){
         if(quantities[product.id]){
             quantities[product.id] += 1;
         }
@@ -124,7 +124,7 @@ function generateCart() {
         }
     })
     quantities.forEach(function(quantity, id){
-        products.forEach(function(product, index){
+        products.forEach(function(product){
             if(product.id == id){
                 cart.push(product);
                 cart[cart.length - 1].quantity = quantity;
@@ -161,7 +161,7 @@ function printCart() {
 	? "<tr><th scope='row'>Empty</th><td></td><td></td><td></td><td></td></tr>" 
 	: "";
 	var subtotal = 0;
-	cart.forEach(function(product, index){
+	cart.forEach(function(product){
 	   htmlCartList += "<tr>"
 	   htmlCartList += "<th scope='row'>" + product.name + "</th><td>$" + product.price + "</td><td>" + product.quantity + "</td><td>";
 	   
