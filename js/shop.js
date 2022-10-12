@@ -75,15 +75,14 @@ function generateCart() {
 
 function applyPromotionsCart(cart) {
 	// Apply promotions to each item in the array "cart"
-
+	console.log(cart)
 	cart.forEach((element) => {
 
-		element.subtotalWithDiscount = element.subtotal;
+		//element.subtotalWithDiscount = element.subtotal;
 	
-		if ( element.offer && element.quantity >= element.offer.number) {
-		  element.subtotalWithDiscount = parseFloat((element.quantity * element.offer.percent).toFixed(2));
+		if ((element.id == 1 || element.id == 3) && element.quantity >= element.offer.number) {
+		  element.subtotalWithDiscount = Number(((element.quantity * element.price) - element.quantity * element.price * element.offer.percent /100).toFixed(2));
 		} 
-	
 	  });
 	}
 
@@ -96,23 +95,24 @@ function printCart() {
 	? "<tr><th scope='row'>Empty</th><td></td><td></td><td></td><td></td></tr>" 
 	: "";
 	let subtotal = 0;
+	
+	console.log(cart)
+
 	cart.forEach(function(product){
 	   htmlCartList += "<tr>"
 	   htmlCartList += "<th scope='row'>" + product.name + "</th><td>$" + product.price + "</td><td>" + product.quantity + "</td><td>";
 	   
-	   if(product.subtotalWithDiscount){
+	   if(product.subtotalWithDiscount){ 
 		   htmlCartList += "$"+ product.subtotalWithDiscount + " (-" + product.offer.percent+"%)</td>";
-		   subtotal += product.subtotalWithDiscount;
+		   subtotal += product.subtotalWithDiscount; // arreglar operació
 	   }
 	   else{
 		   htmlCartList += "$" + product.quantity * product.price + "</td>";
 		   subtotal += (product.quantity * product.price);
 	   }
 	   
-
-	   htmlCartList += "<td><i rel='" + product.id + "' class='fas fa-trash remove-product'></i></td></tr>";
+	   htmlCartList += "<td><i rel='" + product.id + "' class='fas fa-trash remove-product'></i></td></tr>"; // REVISAR
 	
-	 
 	})
 	document.getElementById('cart_list').innerHTML = htmlCartList;
 	document.getElementById('total_price').innerHTML = subtotal;
@@ -174,9 +174,12 @@ function removeFromCart(id) {
                 cart.splice(index, 1)
             
             document.getElementById('count_product').innerHTML = parseInt(document.getElementById('count_product').innerHTML) - 1;
-            return(printCart());    
+           /*  return */    
         }
+		
      })
+
+	 printCart();
 
  }
  
@@ -185,7 +188,6 @@ function removeFromCart(id) {
      printCart();
  }
  
-
  document.getElementById('cart_list').addEventListener('click', e => { 
 	if(e.target.classList.contains('remove-product')){
 		id = e.target.getAttribute('rel');
