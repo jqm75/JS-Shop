@@ -1,38 +1,33 @@
+const validateEmail = (email) => {
+	return String(email)
+	  .toLowerCase()
+	  .match(
+		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+	  );
+  };
+const addClassError = (element, error) => {
+	if(error){
+		element.classList.add('is-invalid');
+		
+	}
+	else{
+		element.classList.remove('is-invalid');
+		element.classList.add('is-valid');
+	}
+}
 // Exercise 6
 function validate() {
-// Creamos reglas para validar email
-	const validateEmail = (email) => {
-		return String(email)
-		  .toLowerCase()
-		  .match(
-			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-		  );
-	  };
-	const addClassError = (element, error) => {
-		if(error){
-			element.classList.add('is-invalid');
-			
-		}
-		else{
-			element.classList.remove('is-invalid');
-			element.classList.add('is-valid');
-		}
-	}
-// Fin reglas
-
 	let error = 0;
+	// Get form
+	let checkoutForm = document.getElementById("checkoutForm");
+
 	// Get the input fields
 	let fName = document.getElementById("fName");
 	let fEmail = document.getElementById("fEmail");
-
 	let fAddress = document.getElementById("fAddress");
 	let fLastN = document.getElementById("fLastN");
 	let fPassword = document.getElementById("fPassword");
 	let fPhone = document.getElementById("fPhone");
-
-	// Get the error elements
-/* 	let errorName = document.getElementById("errorName");
-	let errorEmail = document.getElementById("errorEmail");  */
 	
 	// Validate fields entered by the user: name, phone, password, and email
 	if(fName.value == "" || !fName.value.match(/^[A-Za-z\s]*$/) || fName.value.length < 3){
@@ -91,9 +86,10 @@ function validate() {
 	}else{
 		alert("OK");
 	}
-
+	let invalidFields = document.getElementsByClassName('is-invalid');
+	
 }
-checkoutForm.addEventListener('click', e => {   //REVISAR
+checkoutForm.addEventListener('focus', e => {
 	if(e.target.classList.contains('is-invalid')){
 		e.target.classList.remove('is-invalid')
 	} 

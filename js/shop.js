@@ -74,21 +74,22 @@ let total = 0;
 function buy(id) {
 	// 1. Loop for to the array products to get the item to add to cart
 	// 2. Add found product to the cartList array
-	addToCart(id);
-	products.forEach(function (product) {
-		if (product.id === id) {
-			cartList.push(product);
-		}
-	});
 
-	document.getElementById("count_product").innerHTML = cartList.length; // count_product: Line 31 index.html
-	console.log(cartList, "cartList");
-	calculateTotal();
+	products.forEach(function(product, index){
+		if(product.id == id){
+		   cartList.push(product);
+		}
+	})
+
+	document.getElementById('count_product').innerHTML = cartList.length;
+	console.log(cartList);
+	calculateTotal()
+
 }
 
 // Exercise 2
 function cleanCart() {
-	// Objetivo general: Vaciar carrito
+	// Vaciar carrito
 	cartList = [];
 	cart = [];
 	total = 0;
@@ -113,23 +114,32 @@ function generateCart() {
 	// Using the "cartlist" array that contains all the items in the shopping cart,
 	// generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 	cart = [];
+    quantities = [];
+    cartList.forEach(function(product, index){
+        if(quantities[product.id]){
+            quantities[product.id] += 1;
+        }
+        else{
+            quantities[product.id] = 1;
+        }
+    })
+    quantities.forEach(function(quantity, id){
+        products.forEach(function(product, index){
+            if(product.id == id){
+                cart.push(product);
+                cart[cart.length - 1].quantity = quantity;
+            }
+        })
+    })
 
-	cartList.forEach(function (id) { //quantity
-		products.forEach(function (product) {
-			if (product.id === id) {
-				cart.push(product);
-				/* cart[cart.length - 1].quantity = quantity; */
-			}
-		});
-	});
-
-	applyPromotionsCart(cart);
-}
+    applyPromotionsCart(cart);
+ }
+	
 
 // Exercise 5
+
 function applyPromotionsCart(cart) {
 	// Apply promotions to each item in the array "cart"
-
 	cart.forEach((element) => {
 		element.subtotalWithDiscount = element.subtotal;
 		const activateDiscount = element.quantity >= element.offer.number;
@@ -137,9 +147,9 @@ function applyPromotionsCart(cart) {
 			element.subtotalWithDiscount = parseFloat(
 				(element.quantity * element.offer.percent).toFixed(2)
 			);
-		} /* else if (element.offer && !activateDiscount) {
+		} else if (element.offer && !activateDiscount) {
 			element.subtotalWithDiscount = "";
-		} */
+		}
 	});
 
 	console.log(cart);
@@ -149,33 +159,26 @@ function applyPromotionsCart(cart) {
 function printCart() {
 	// Fill the shopping cart modal manipulating the shopping cart dom
 
-	let htmlCartList =
-		cart.length == 0
-			? "<tr><th scope='row'>Empty</th><td></td><td></td><td></td></tr>"
-			: "";
-	let subtotal = 0;
-	cart.forEach((product) => {
-		htmlCartList += `<tr><th scope='row'>${product.name}</th><td>${product.price}</td><td>${product.quantity}</td><td>`;
-
-		if (product.subtotalWithDiscount) {
-			htmlCartList +=
-				"$" +
-				product.subtotalWithDiscount +
-				" (-" +
-				product.offer.percent +
-				"%)</td>";
-			subtotal += product.subtotalWithDiscount;
-		} else {
-			htmlCartList += "$" + product.quantity * product.price + "</td>";
-			subtotal += product.quantity * product.price;
-		}
-		htmlCartList +=
-			"<td><i rel='" +
-			product.id +
-			"' class='fas fa-trash remove-product'></i></td></tr>";
-	});
-	document.getElementById("cart_list").innerHTML = htmlCartList;
-	document.getElementById("total_price").innerHTML = subtotal;
+	var htmlCartList = cart.length == 0
+	? "<tr><th scope='row'>Empty</th><td></td><td></td><td></td><td></td></tr>" 
+	: "";
+	var subtotal = 0;
+	cart.forEach(function(product, index){
+	   htmlCartList += "<tr>"
+	   htmlCartList += "<th scope='row'>" + product.name + "</th><td>$" + product.price + "</td><td>" + product.quantity + "</td><td>";
+	   
+	   if(product.subtotalWithDiscount){
+		   htmlCartList += "$"+ product.subtotalWithDiscount + " (-" + product.offer.percent+"%)</td>";
+		   subtotal += product.subtotalWithDiscount;
+	   }
+	   else{
+		   htmlCartList += "$" + product.quantity * product.price + "</td>";
+		   subtotal += (product.quantity * product.price);
+	   }
+	   htmlCartList += "<td><i rel='" + product.id + "' class='fas fa-trash remove-product'></i></td></tr>";
+	})
+	document.getElementById('cart_list').innerHTML = htmlCartList;
+	document.getElementById('total_price').innerHTML = subtotal;
 }
 
 // ** Nivell II **
@@ -225,26 +228,28 @@ function removeFromCart(id) {
 	// 1. Loop for to the array products to get the item to add to cart
 	// 2. Add found product to the cartList array
 
-	cart.forEach(function (product, index) {
-		if (product.id == id) {
-			if (cart[index].quantity > 1) cart[index].quantity--;
-			else cart.splice(index, 1);
+	cart.forEach(function(product, index){
+        if(product.id == id){
 
-			document.getElementById("count_product").innerHTML =
-				parseInt(document.getElementById("count_product").innerHTML) - 1;
-			return printCart();
-		}
-	});
-}
+            if(cart[index].quantity > 1)
+                cart[index].quantity--
+            else
+                cart.splice(index, 1)
+            
+            document.getElementById('count_product').innerHTML = parseInt(document.getElementById('count_product').innerHTML) - 1;
+            return(printCart());    
+        }
+     })
 
-function open_modal() {
-	console.log("Open Modal");
-	printCart();
-}
-document.getElementById("cart_list").addEventListener("click", (e) => {
-	//REVISAR
-	if (e.target.classList.contains("remove-product")) {
-		id = e.target.getAttribute("rel");
-		removeFromCart(id);
-	}
-});
+ }
+ 
+ function open_modal(){
+     console.log("Open Modal");
+     printCart();
+ }
+ document.getElementById('cart_list').addEventListener('click', e => {
+	if(e.target.classList.contains('remove-product')){
+		id = e.target.getAttribute('rel');
+        removeFromCart(id);
+	} 
+ });
