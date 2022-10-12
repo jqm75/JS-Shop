@@ -245,7 +245,10 @@ function removeFromCart(id) {
      console.log("Open Modal");
      printCart();
  }
- document.getElementById('cart_list').addEventListener('click', e => {
+ 
+ // REVISAR
+
+ document.getElementById('cart_list').addEventListener('click', e => { 
 	if(e.target.classList.contains('remove-product')){
 		id = e.target.getAttribute('rel');
         removeFromCart(id);
