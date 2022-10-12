@@ -153,7 +153,6 @@ function applyPromotionsCart(cart) {
 	}
 
 
-
 // Exercise 6
 function printCart() {
 	// Fill the shopping cart modal manipulating the shopping cart dom
@@ -222,7 +221,7 @@ function addToCart(id) {
 	printCart();
 }
 
-// Exercise 8 a 9
+// Exercise 8 - 9
 function removeFromCart(id) {
 	// 1. Loop for to the array products to get the item to add to cart
 	// 2. Add found product to the cartList array
