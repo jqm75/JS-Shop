@@ -108,9 +108,9 @@ function printCart() {
 		   htmlCartList += "$" + product.quantity * product.price + "</td>";
 		   subtotal += (product.quantity * product.price);
 	   }
+	   
 	   htmlCartList += "<td><i rel='" + product.id + "' class='fas fa-trash remove-product'></i></td></tr>";
 	
-	 
 	})
 	document.getElementById('cart_list').innerHTML = htmlCartList;
 	document.getElementById('total_price').innerHTML = subtotal;
@@ -183,8 +183,6 @@ function removeFromCart(id) {
      printCart();
  }
  
- // REVISAR
-
  document.getElementById('cart_list').addEventListener('click', e => { 
 	if(e.target.classList.contains('remove-product')){
 		id = e.target.getAttribute('rel');
