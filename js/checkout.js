@@ -31,7 +31,7 @@ function validate() {
 	let fPhone = document.getElementById("fPhone");
 
 	// Get the error elements
-/* 	 var errorName = document.getElementById("errorName");
+/* 	var errorName = document.getElementById("errorName");
 	var errorEmail = document.getElementById("errorEmail");
 
 	var errorAddress = document.getElementById("errorAddress");

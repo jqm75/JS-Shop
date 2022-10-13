@@ -77,12 +77,13 @@ function applyPromotionsCart(cart) {
 	// Apply promotions to each item in the array "cart"
 	console.log(cart)
 	cart.forEach((element) => {
-
-		//element.subtotalWithDiscount = element.subtotal;
-	
-		if ((element.id == 1 || element.id == 3) && element.quantity >= element.offer.number) {
-		  element.subtotalWithDiscount = Number(((element.quantity * element.price) - element.quantity * element.price * element.offer.percent /100).toFixed(2));
+		const offerExist = element.offer
+		if (offerExist) {
+			const activeOffer = element.quantity >= element.offer.number
+			if (activeOffer) element.subtotalWithDiscount = Number(((element.quantity * element.price) - element.quantity * element.price * element.offer.percent /100).toFixed(2));
+			if (!activeOffer) delete(element.subtotalWithDiscount)
 		} 
+
 	  });
 	}
 
@@ -175,10 +176,11 @@ function removeFromCart(id) {
             
             document.getElementById('count_product').innerHTML = parseInt(document.getElementById('count_product').innerHTML) - 1;
            /*  return */    
-        }
+        } 
 		
      })
-
+	 applyPromotionsCart(cart);
+	 calculateTotal();
 	 printCart();
 
  }
